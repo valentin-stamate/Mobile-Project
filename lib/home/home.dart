@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/home/components/frequent_playlists.dart';
+import 'package:spotify/home/components/made_for.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,7 +15,9 @@ class Home extends StatelessWidget {
 
         children: const [
           SizedBox(height: 16),
-          FrequentPlaylists()
+          FrequentPlaylists(),
+          SizedBox(height: 8),
+          MadeFor(),
         ],
       ),
     );

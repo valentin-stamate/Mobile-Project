@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'ThemeColors.dart';
+import 'colors.dart';
 
 var spotifyTheme = ThemeData(
   backgroundColor: ThemeColors.backgroundColor,

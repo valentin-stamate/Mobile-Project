@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/assets/assets.dart';
-import 'package:spotify/theme/ThemeColors.dart';
+import 'package:spotify/theme/colors.dart';
 import 'package:spotify/utils/icon.dart';
 
 class FrequentPlaylists extends StatelessWidget {
@@ -67,7 +67,7 @@ class Playlists extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
-              children: [
+              children: const [
                 PlaylistItem(title: 'One'),
                 SizedBox(height: 8),
                 PlaylistItem(title: 'Two'),
@@ -79,7 +79,7 @@ class Playlists extends StatelessWidget {
           SizedBox(width: 16),
           Expanded(
             child: Column(
-              children: [
+              children: const [
                 PlaylistItem(title: 'One'),
                 SizedBox(height: 8),
                 PlaylistItem(title: 'Two'),
