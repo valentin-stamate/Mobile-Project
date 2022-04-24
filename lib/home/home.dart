@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:spotify/home/components/intro.dart';
+import 'package:spotify/home/components/frequent_playlists.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class Home extends StatelessWidget {
 
         children: const [
           SizedBox(height: 16),
-          Intro()
+          FrequentPlaylists()
         ],
       ),
     );

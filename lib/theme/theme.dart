@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-const backgroundColor = Color(0xFF121212); // #121212
-const transparent = Color.fromRGBO(0, 0, 0, 0);
+import 'ThemeColors.dart';
 
 var spotifyTheme = ThemeData(
-  backgroundColor: backgroundColor,
-  scaffoldBackgroundColor: backgroundColor,
-  dialogBackgroundColor: backgroundColor,
+  backgroundColor: ThemeColors.backgroundColor,
+  scaffoldBackgroundColor: ThemeColors.backgroundColor,
+  dialogBackgroundColor: ThemeColors.backgroundColor,
   appBarTheme: const AppBarTheme(
-    backgroundColor: backgroundColor,
-    shadowColor: transparent,
+    backgroundColor: ThemeColors.backgroundColor,
+    shadowColor: ThemeColors.transparent,
     toolbarHeight: 0,
     systemOverlayStyle: SystemUiOverlayStyle(
-      systemNavigationBarColor: backgroundColor,
+      systemNavigationBarColor: ThemeColors.backgroundColor,
       systemNavigationBarIconBrightness: Brightness.light,
       systemNavigationBarDividerColor: null,
       // statusBarColor: Color(0xFFD59898),
