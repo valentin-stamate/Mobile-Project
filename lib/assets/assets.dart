@@ -6,6 +6,7 @@ class Assets {
   static const String bellSolid = '$iconPath/bell-solid.svg';
   static const String clockRotate = '$iconPath/clock-rotate-left-solid.svg';
   static const String settings = '$iconPath/gear-solid.svg';
+  static const String hearthFilled = '$iconPath/heart-crack-solid.svg';
 
   /* Images */
   static const String demo = '$imagePath/demo.jpg';

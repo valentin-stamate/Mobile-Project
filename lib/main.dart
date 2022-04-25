@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spotify/home/home.dart';
+import 'package:spotify/playlist/playlist.dart';
 import 'package:spotify/theme/theme.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: spotifyTheme,
-      home: const Home(),
+      home: const Playlist(),
     );
   }
 }
