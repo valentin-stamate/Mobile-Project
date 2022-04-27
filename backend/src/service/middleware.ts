@@ -1,5 +1,9 @@
 import {NextFunction, Request, Response,} from "express";
 import {ResponseMessage, StatusCode} from "./rest.utils";
+import {JwtService} from "./jwt.service";
+import {Collections, database} from "../database/database";
+import {User} from "./models";
+import {ObjectId} from "mongodb";
 require('dotenv').config();
 
 const env = process.env;
@@ -13,7 +17,23 @@ export class Middleware {
     }
 
     static async userMiddleware(req: Request<any>, res: Response, next: NextFunction) {
-        /* TODO */
+        const token = req.get('Authorization') as string;
+
+        if (!token) {
+            next(new ResponseError(ResponseMessage.AUTHORIZATION_MISSING));
+            return;
+        }
+
+        const user = JwtService.verifyToken(token) as User;
+        user._id = new ObjectId(user._id);
+
+        const userCollection = database.collection(Collections.USER);
+        const existingUser = await userCollection.findOne({_id: user._id});
+
+        if (!existingUser) {
+            next(new ResponseError(ResponseMessage.USER_NOT_FOUND, StatusCode.NOT_FOUND));
+            return;
+        }
 
         res.setHeader('Content-Type', 'application/json');
         next();

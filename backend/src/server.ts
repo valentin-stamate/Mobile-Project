@@ -4,9 +4,9 @@ import helmet from 'helmet';
 import morgan from "morgan";
 import fileUpload from "express-fileupload";
 import {connectToMongo} from "./database/database";
-import {Endpoints} from "./endpoints";
-import {Middleware} from "./middleware";
-import {Controller} from "./controller";
+import {Endpoints} from "./service/endpoints";
+import {Middleware} from "./service/middleware";
+import {Controller} from "./controller/controller";
 
 require('dotenv').config();
 const env = process.env;
@@ -41,7 +41,21 @@ if (process.env.NODE_ENV === 'production' || env.NODE_ENV === 'production') {
 /************************************************************************************
  *                               Register all REST routes
  ***********************************************************************************/
-app.get(Endpoints.HELLO, Middleware.visitorMiddleware, Controller.hello);
+app.post(Endpoints.REGISTER, Middleware.visitorMiddleware, Controller.register);
+app.post(Endpoints.LOGIN, Middleware.visitorMiddleware, Controller.login);
+
+app.get(Endpoints.PLAYLISTS, Middleware.userMiddleware, Controller.getPlaylists);
+app.get(Endpoints.RAW_SONG, Middleware.userMiddleware, Controller.getSong);
+app.get(Endpoints.USER_SONGS, Middleware.userMiddleware, Controller.getUserSongs);
+app.post(Endpoints.USER_SONGS, Middleware.userMiddleware, Controller.addUserSong);
+app.delete(Endpoints.USER_SONGS, Middleware.userMiddleware, Controller.removeUserSong);
+app.get(Endpoints.PLAYLIST_SONG, Middleware.userMiddleware, Controller.getPlaylistSongs);
+
+app.get(Endpoints.SONGS, Middleware.adminMiddleware, Controller.getSongs);
+app.post(Endpoints.SONGS, Middleware.adminMiddleware, Controller.addSong);
+app.post(Endpoints.PLAYLIST_SONG, Middleware.adminMiddleware, Controller.addSongToPlaylist);
+app.post(Endpoints.PLAYLISTS, Middleware.adminMiddleware, Controller.addPlaylist);
+
 
 /************************************************************************************
  *                               Express Error Handling

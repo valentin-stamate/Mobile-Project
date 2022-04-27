@@ -20,8 +20,11 @@ export async function connectToMongo() {
     }
 }
 
-export enum MongoCollection {
-    USERS = 'users',
-    SONGS = 'songs',
+export enum Collections {
+    USER = 'users',
+    SONG = 'songs',
+    RAW_SONGS = 'raw_songs',
     PLAYLISTS = 'playlists',
+    PLAYLIST_SONGS = 'playlist_songs',
+    USER_SONGS = 'user_songs',
 }

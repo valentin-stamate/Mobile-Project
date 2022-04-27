@@ -1,7 +1,15 @@
 export enum ResponseMessage {
     INCOMPLETE_FORM = 'Incomplete form',
     ADMIN_ACCESS_ONLY = 'Admin access only',
-    FORM_SHOULD_MEET_THE_CONSTRAINTS = 'The form should meet the constraints',
+    USER_ALREADY_EXISTS = 'User already exists',
+    USER_NOT_FOUND = 'User not found',
+    INVALID_PASSWORD = 'Invalid password',
+    SOMETHING_WRONG = 'Something went wrong',
+    PLAYLIST_NOT_FOUND = 'Playlist not found',
+    SONG_NOT_FOUND = 'Song not found',
+    SONG_ALREADY_IN_PLAYLIST = 'The song is already in playlist',
+    SONG_ALREADY_IN_FAVORITES = 'Song already in favorites',
+    AUTHORIZATION_MISSING = 'Authorization header missing',
 }
 
 /** Contains the request responses */
