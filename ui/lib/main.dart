@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:spotify/home/home.dart';
-import 'package:spotify/playlist/playlist.dart';
+import 'package:spotify/register/login.dart';
+import 'package:spotify/register/register.dart';
+import 'package:spotify/routes.dart';
 import 'package:spotify/theme/theme.dart';
 
 void main() {
@@ -16,7 +17,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: spotifyTheme,
-      home: const Playlist(),
+      initialRoute: Routes.login,
+      routes: {
+        Routes.login: (context) => Login(),
+        Routes.register: (context) => const Register(),
+      },
     );
   }
 }
