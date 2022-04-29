@@ -18,6 +18,17 @@ class Login extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds the data related to the Form.
 class _Login extends State<Login> {
+  _Login() {
+    init();
+  }
+
+  init() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString(StoreKey.token) != null) {
+      Navigator.pushNamed(context, Routes.home);
+    }
+  }
+
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
   final firstFormController = TextEditingController();
@@ -92,6 +103,7 @@ class _Login extends State<Login> {
                         final prefs = await SharedPreferences.getInstance();
                         if (response.statusCode == 200) {
                           prefs.setString(StoreKey.token, response.body);
+                          Navigator.pushNamed(context, Routes.home);
                         }
 
                         debugPrint(prefs.getString(StoreKey.token));

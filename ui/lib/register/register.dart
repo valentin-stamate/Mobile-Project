@@ -75,7 +75,7 @@ class _Register extends State<Register> {
                         var username = firstFormController.text;
                         var password = secondFormController.text;
 
-                        var response = await http.post(Uri.parse(Endpoints.login),
+                        var response = await http.post(Uri.parse(Endpoints.register),
                             headers: <String, String>{
                               'Content-Type': 'application/json; charset=UTF-8',
                             },
@@ -87,11 +87,9 @@ class _Register extends State<Register> {
                         debugPrint(response.body);
 
                         final prefs = await SharedPreferences.getInstance();
-                        if (response.statusCode == 200) {
-                          prefs.setString(StoreKey.token, response.body);
+                        if (response.statusCode == 201) {
+                          Navigator.pushNamed(context, Routes.login);
                         }
-
-                        debugPrint(prefs.getString(StoreKey.token));
 
                       },
                       child: Text('Register'),

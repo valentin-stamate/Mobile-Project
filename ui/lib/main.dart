@@ -4,6 +4,8 @@ import 'package:spotify/register/register.dart';
 import 'package:spotify/routes.dart';
 import 'package:spotify/theme/theme.dart';
 
+import 'home/home.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.login,
       routes: {
         Routes.login: (context) => Login(),
-        Routes.register: (context) => const Register(),
+        Routes.register: (context) => Register(),
+        Routes.home: (context) => Home(),
       },
     );
   }
