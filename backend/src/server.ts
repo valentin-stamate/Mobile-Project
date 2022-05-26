@@ -29,8 +29,8 @@ app.use(fileUpload());
 app.set('json spaces', 4);
 
 // Handle logs in console during development
+app.use(cors());
 if (process.env.NODE_ENV === 'development' || env.NODE_ENV === 'development') {
-    app.use(cors({origin: '*'}));
 }
 
 // Handle security and origin in production
@@ -45,10 +45,10 @@ app.post(Endpoints.REGISTER, Middleware.visitorMiddleware, Controller.register);
 app.post(Endpoints.LOGIN, Middleware.visitorMiddleware, Controller.login);
 
 app.get(Endpoints.PLAYLISTS, Middleware.userMiddleware, Controller.getPlaylists);
-app.get(Endpoints.RAW_SONG, Middleware.userMiddleware, Controller.getSong);
+app.get(`${Endpoints.RAW_SONG}/:id`, Middleware.userMiddleware, Controller.getSong);
 app.get(Endpoints.USER_SONGS, Middleware.userMiddleware, Controller.getUserSongs);
-app.post(Endpoints.USER_SONGS, Middleware.userMiddleware, Controller.addUserSong);
-app.delete(Endpoints.USER_SONGS, Middleware.userMiddleware, Controller.removeUserSong);
+app.post(`${Endpoints.USER_SONGS}/:id`, Middleware.userMiddleware, Controller.addUserSong);
+app.delete(`${Endpoints.USER_SONGS}/:id`, Middleware.userMiddleware, Controller.removeUserSong);
 app.get(Endpoints.PLAYLIST_SONG, Middleware.userMiddleware, Controller.getPlaylistSongs);
 
 app.get(Endpoints.SONGS, Middleware.adminMiddleware, Controller.getSongs);

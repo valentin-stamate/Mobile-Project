@@ -24,10 +24,9 @@ export class Controller {
     }
 
     static async removeUserSong(req: Request<any>, res: Response, next: NextFunction) {
-        const body = req.body;
         const token = req.get('Authorization') as string;
         const user = JwtService.verifyToken(token) as User;
-        const songId = body.songId;
+        const songId = req.params.id;
 
         try {
             await Service.removeUserSong(new ObjectId(user._id), new ObjectId(songId));
@@ -40,10 +39,9 @@ export class Controller {
     }
 
     static async addUserSong(req: Request<any>, res: Response, next: NextFunction) {
-        const body = req.body;
         const token = req.get('Authorization') as string;
         const user = JwtService.verifyToken(token) as User;
-        const songId = body.songId;
+        const songId = req.params.id;
 
         try {
             await Service.addUserSong(new ObjectId(user._id), new ObjectId(songId));
@@ -70,8 +68,7 @@ export class Controller {
     }
 
     static async getSong(req: Request<any>, res: Response, next: NextFunction) {
-        const body = req.body;
-        const rawSongId = body.rawSongId;
+        const rawSongId = req.params.id;
 
         try {
             const rawSong = await Service.getSong(new ObjectId(rawSongId));

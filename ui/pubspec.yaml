@@ -37,6 +37,7 @@ dependencies:
   flutter_svg: ^1.0.3
   http: ^0.13.4
   shared_preferences: ^2.0.13
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:

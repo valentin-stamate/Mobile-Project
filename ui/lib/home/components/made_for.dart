@@ -76,7 +76,7 @@ class SuggestionCard extends StatelessWidget {
           Container(
             alignment: Alignment.topLeft,
             child: const Text(
-              'Ana are mere',
+              'Playlist',
               style: TextStyle(
                 fontSize: 12,
                 color: ThemeColors.fontDarker,

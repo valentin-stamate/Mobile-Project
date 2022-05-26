@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:spotify/song_view.dart';
 import 'package:spotify/theme/colors.dart';
 import '../assets/assets.dart';
+import '../models.dart';
 import '../utils/icon.dart';
 
-class Playlist extends StatelessWidget {
-  const Playlist({Key? key}) : super(key: key);
+class PlaylistWidget extends StatelessWidget {
+  final Playlist playlist;
+
+  PlaylistWidget({Key? key, required this.playlist}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: const [
+        children: [
           SizedBox(height: 128),
-          PlaylistInfo(),
-          PlaylistList(),
+          PlaylistInfo(playlist: this.playlist),
+          PlaylistList(songs: this.playlist.songs),
         ],
       ),
     );
@@ -22,7 +26,9 @@ class Playlist extends StatelessWidget {
 }
 
 class PlaylistInfo extends StatelessWidget {
-  const PlaylistInfo({Key? key}) : super(key: key);
+  final Playlist playlist;
+
+  PlaylistInfo({Key? key, required this.playlist}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +42,9 @@ class PlaylistInfo extends StatelessWidget {
         children: [
           Image.asset(Assets.demo, width: 240, height: 240),
           SizedBox(height: 24),
-          Text('Playlist name', style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(this.playlist.name, style: const TextStyle(fontWeight: FontWeight.bold)),
           SizedBox(height: 12),
-          Text('Made for User', style: const TextStyle(fontWeight: FontWeight.bold, color: ThemeColors.fontDarker, fontSize: 12)),
-          Text('Stats', style: const TextStyle(fontWeight: FontWeight.bold, color: ThemeColors.fontDarker, fontSize: 12)),
+          Text(this.playlist.description, style: const TextStyle(fontWeight: FontWeight.bold, color: ThemeColors.fontDarker, fontSize: 12)),
         ],
       ),
     );
@@ -48,10 +53,20 @@ class PlaylistInfo extends StatelessWidget {
 }
 
 class PlaylistList extends StatelessWidget {
-  const PlaylistList({Key? key}) : super(key: key);
+  final List<Song> songs;
+
+  PlaylistList({Key? key, required this.songs}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    List<Widget> songWidgets = [];
+
+    for (var song in this.songs) {
+      songWidgets.add(PlaylistItem(song: song));
+      songWidgets.add(SizedBox(height: 16,));
+    }
+
     return Container(
       padding: const EdgeInsets.all(16),
 
@@ -59,15 +74,7 @@ class PlaylistList extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
 
-        children: [
-          PlaylistItem(),
-          SizedBox(height: 16),
-          PlaylistItem(),
-          SizedBox(height: 16),
-          PlaylistItem(),
-          SizedBox(height: 16),
-          PlaylistItem(),
-        ],
+        children: songWidgets,
       ),
     );
   }
@@ -75,35 +82,46 @@ class PlaylistList extends StatelessWidget {
 }
 
 class PlaylistItem extends StatelessWidget {
-  const PlaylistItem({Key? key}) : super(key: key);
+  final Song song;
+
+  const PlaylistItem({Key? key, required this.song}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge, // overflow hidden
-      decoration: BoxDecoration(
-        // color: ThemeColors.cardColor,
-        // borderRadius: BorderRadius.circular(4),
-      ),
+    return GestureDetector(
+      onTap: () => {
 
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) => SongViewWidget(song: this.song)
+        ))
 
-        children: [
-          Image.asset(Assets.demo, width: 48, height: 48),
-          SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      },
+      child: Container(
+        clipBehavior: Clip.hardEdge, // overflow hidden
+        decoration: const BoxDecoration(
+          // color: ThemeColors.cardColor,
+          // borderRadius: BorderRadius.circular(4),
+        ),
 
-            children: [
-              Text('Song title', style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text('Song artist', style: const TextStyle(fontWeight: FontWeight.bold, color: ThemeColors.fontDarker, fontSize: 12)),
-            ],
-          ),
-          Spacer(),
-          AppIcon(Assets.hearthFilled),
-          SizedBox(width: 16),
-        ],
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+
+          children: [
+            Image.asset(Assets.demo, width: 48, height: 48),
+            SizedBox(width: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Text(this.song.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(this.song.artist, style: const TextStyle(fontWeight: FontWeight.bold, color: ThemeColors.fontDarker, fontSize: 12)),
+              ],
+            ),
+            Spacer(),
+            AppIcon(Assets.hearthFilled),
+            SizedBox(width: 16),
+          ],
+        ),
       ),
     );
   }
